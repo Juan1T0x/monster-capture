@@ -13,6 +13,9 @@ public class ShapeDrawingScript : MonoBehaviour
 
     public GameObject pointer;
 
+    public GameObject pointPrefab;
+    private List<GameObject> pointList = new List<GameObject>();
+
     void Update()
     {
         // If the mouse is pressed down
@@ -22,6 +25,13 @@ public class ShapeDrawingScript : MonoBehaviour
             isDrawing = true;
             points.Clear();
             lineRenderer.positionCount = 0;
+
+            foreach (var p in pointList)
+            {
+                Destroy(p);
+            }
+
+            pointList.Clear();
 
         }
 
@@ -40,6 +50,9 @@ public class ShapeDrawingScript : MonoBehaviour
                 points.Add(mousePos);
                 lineRenderer.positionCount = points.Count;
                 lineRenderer.SetPosition(points.Count - 1, mousePos);
+
+                GameObject pointInstance = Instantiate(pointPrefab, new Vector3(mousePos.x, mousePos.y, 0), Quaternion.identity);
+                pointList.Add(pointInstance);
             }
         }
 
