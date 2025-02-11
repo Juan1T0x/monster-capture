@@ -16,6 +16,8 @@ public class ShapeDrawingScript : MonoBehaviour
     public GameObject pointPrefab;
     private List<GameObject> pointList = new List<GameObject>();
 
+    private bool isFirstPoint = true;
+
     void Update()
     {
         // If the mouse is pressed down
@@ -51,26 +53,63 @@ public class ShapeDrawingScript : MonoBehaviour
                 lineRenderer.positionCount = points.Count;
                 lineRenderer.SetPosition(points.Count - 1, mousePos);
 
-                GameObject pointInstance = Instantiate(pointPrefab, new Vector3(mousePos.x, mousePos.y, 0), Quaternion.identity);
-                pointList.Add(pointInstance);
+
+                // If it's the first point, the point will be 2x bigger and red
+
+                if(isFirstPoint)
+                {
+
+                    GameObject pointInstance = Instantiate(pointPrefab, new Vector3(mousePos.x, mousePos.y, 0), Quaternion.identity);
+                    pointInstance.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                    pointInstance.GetComponent<SpriteRenderer>().color = Color.red;
+                    pointList.Add(pointInstance);
+                    isFirstPoint = false;
+
+                }
+
+                else
+                {
+
+                    GameObject pointInstance = Instantiate(pointPrefab, new Vector3(mousePos.x, mousePos.y, 0), Quaternion.identity);
+                    pointList.Add(pointInstance);
+
+                }
+
+
             }
         }
 
         if(Input.GetMouseButtonUp(0) && isDrawing)
         {
             isDrawing = false;
+            isFirstPoint = true;
 
             if (pointer.activeSelf)
                 pointer.SetActive(false);
 
+            // Print if it's a circle or not in the screen
+
             if (isCircle(points))
             {
                 Debug.Log("Circle");
+
+
             }
             else
             {
                 Debug.Log("Not a circle");
+
             }
+
+            points.Clear();
+            lineRenderer.positionCount = 0;
+
+            foreach (var p in pointList)
+            {
+                Destroy(p);
+            }
+
+            pointList.Clear();
         }
     }
 
