@@ -7836,6 +7836,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c8ae5b3b4222ee499231a18e0a496bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugPoints: 0
   lineRenderer: {fileID: 708350426}
   minimumPoints: 10
   pointer: {fileID: 1843040708}
@@ -7896,13 +7897,22 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.03809524
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.9902892
+        value: 0.03614807
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -8191,6 +8201,26 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: -1, y: -2, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 13
+      m_TileSpriteIndex: 3
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: -1, y: -1, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 12
+      m_TileSpriteIndex: 2
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: 0, y: -1, z: 0}
     second:
       serializedVersion: 2
@@ -8437,10 +8467,10 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: 5891e97a359ed9e4fafe6e8f69ea2114, type: 2}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: a73e4cf56c3172a4b8fd7bf4ee762542, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 406fe4a0516f61240b6106b203be1c64, type: 2}
   - m_RefCount: 1
@@ -8490,10 +8520,10 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: -1490869875, guid: e1a78c89b1a341f498cdd75092412fdc, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 624459351, guid: e1a78c89b1a341f498cdd75092412fdc, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -420707158, guid: 65cc455ed65fe424d954539c96cdd18b, type: 3}
   - m_RefCount: 1
@@ -8559,7 +8589,7 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: -1938914019, guid: 65cc455ed65fe424d954539c96cdd18b, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 36
+  - m_RefCount: 38
     m_Data:
       e00: 1
       e01: 0
@@ -8596,7 +8626,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 37
+  - m_RefCount: 39
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -8622,6 +8652,37 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &905647302
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 905647303}
+  m_Layer: 0
+  m_Name: Enemy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &905647303
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 905647302}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.41869223, y: 0.13562904, z: -0.0034880815}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1118498450
 GameObject:
   m_ObjectHideFlags: 0
@@ -16112,3 +16173,4 @@ SceneRoots:
   - {fileID: 708350424}
   - {fileID: 1843040710}
   - {fileID: 1196197456}
+  - {fileID: 905647303}

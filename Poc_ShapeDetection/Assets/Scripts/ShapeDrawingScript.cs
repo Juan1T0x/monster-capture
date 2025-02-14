@@ -5,6 +5,8 @@ using UnityEngine;
 public class ShapeDrawingScript : MonoBehaviour
 {
 
+    public bool debugPoints = true;
+
     public LineRenderer lineRenderer;
     private List<Vector2> points = new List<Vector2>();
     private bool isDrawing = false;
@@ -56,24 +58,29 @@ public class ShapeDrawingScript : MonoBehaviour
 
                 // If it's the first point, the point will be 2x bigger and red
 
-                if(isFirstPoint)
+                if(debugPoints)
                 {
+                    if (isFirstPoint)
+                    {
 
-                    GameObject pointInstance = Instantiate(pointPrefab, new Vector3(mousePos.x, mousePos.y, 0), Quaternion.identity);
-                    pointInstance.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-                    pointInstance.GetComponent<SpriteRenderer>().color = Color.red;
-                    pointList.Add(pointInstance);
-                    isFirstPoint = false;
+                        GameObject pointInstance = Instantiate(pointPrefab, new Vector3(mousePos.x, mousePos.y, 0), Quaternion.identity);
+                        pointInstance.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                        pointInstance.GetComponent<SpriteRenderer>().color = Color.red;
+                        pointList.Add(pointInstance);
+                        isFirstPoint = false;
 
+                    }
+
+                    else
+                    {
+
+                        GameObject pointInstance = Instantiate(pointPrefab, new Vector3(mousePos.x, mousePos.y, 0), Quaternion.identity);
+                        pointList.Add(pointInstance);
+
+                    }
                 }
 
-                else
-                {
 
-                    GameObject pointInstance = Instantiate(pointPrefab, new Vector3(mousePos.x, mousePos.y, 0), Quaternion.identity);
-                    pointList.Add(pointInstance);
-
-                }
 
 
             }
@@ -104,10 +111,15 @@ public class ShapeDrawingScript : MonoBehaviour
             points.Clear();
             lineRenderer.positionCount = 0;
 
-            foreach (var p in pointList)
+            if(debugPoints)
             {
-                Destroy(p);
+                foreach (var p in pointList)
+                {
+                    Destroy(p);
+                }
             }
+
+
 
             pointList.Clear();
         }
