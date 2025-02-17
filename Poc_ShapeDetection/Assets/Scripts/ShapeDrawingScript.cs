@@ -5,12 +5,14 @@ using UnityEngine;
 public class ShapeDrawingScript : MonoBehaviour
 {
 
+    [Header("Debug Settings")]
     public bool debugPoints = true;
 
     public LineRenderer lineRenderer;
     private List<Vector2> points = new List<Vector2>();
     private bool isDrawing = false;
 
+    [Header("Circle Settings")]
     public int minimumPoints = 10;
 
     public GameObject pointer;
@@ -22,6 +24,7 @@ public class ShapeDrawingScript : MonoBehaviour
 
     void Update()
     {
+
         // If the mouse is pressed down
         if (Input.GetMouseButtonDown(0))
         {
