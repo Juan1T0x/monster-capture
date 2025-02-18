@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CircleRecognizer : MonoBehaviour, IShapeRecognizer
 {
-    [Header("Configuración del Círculo")]
+    [Header("Circle Configuration")]
     public int minimumPoints = 10;
     public float closureThreshold = 0.5f;
     public float varianceThreshold = 0.5f;
@@ -45,6 +45,8 @@ public class CircleRecognizer : MonoBehaviour, IShapeRecognizer
         if (variance < varianceThreshold) {
             result.shapeName = "Circle";
             result.score = 1 - (variance / varianceThreshold); // Score entre 0 y 1
+            result.circleCenter = center;
+            result.circleRadius = avgRadius;
             return true;
         }
         
