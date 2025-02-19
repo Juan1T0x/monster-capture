@@ -13,10 +13,10 @@ public class LetterRecognizer : MonoBehaviour, IShapeRecognizer
     [Tooltip("List of letter templates.")]
     public List<LetterTemplate> templates;
 
-    [System.Serializable]
+    [System.Serializable] // We make this class serializable so we can edit it in the inspector
     public class LetterTemplate
     {
-        public string letter;          // Letter name
+        public string letter;          // Letter name that we want to recognize
         public List<Vector2> points;   // Points that define the letter
     }
 
@@ -25,8 +25,7 @@ public class LetterRecognizer : MonoBehaviour, IShapeRecognizer
         result = new RecognitionResult();
 
         // Verify minimum number of points
-        if (points.Count < 10)
-            return false;
+        if (points.Count < 10) return false;
 
         // Preprocess the candidate shape: resample and normalize
         List<Vector2> candidate = Resample(points, resamplePointsCount);

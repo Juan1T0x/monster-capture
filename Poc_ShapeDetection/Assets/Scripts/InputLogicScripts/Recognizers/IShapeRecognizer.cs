@@ -4,12 +4,6 @@ using UnityEngine;
 public struct RecognitionResult {
     public string shapeName;
     public float score;
-
-    // Info about the recognized shape
-
-    // Circle
-    public Vector2 circleCenter;
-    public float circleRadius;
 }
 
 public interface IShapeRecognizer
