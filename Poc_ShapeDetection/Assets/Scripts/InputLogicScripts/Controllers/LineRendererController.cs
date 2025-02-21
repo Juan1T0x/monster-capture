@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class LineRendererController : MonoBehaviour
 {
+    [Header("Line Renderer Settings")]
     public LineRenderer lineRenderer;
     public float pointThreshold = 0.1f;
     public int maxPoints = 20;

@@ -12,52 +12,69 @@ public class CircleRecognizer : MonoBehaviour, IShapeRecognizer
 
     [Tooltip("Maximum variance to consider the drawing a circle.")]
     public float varianceThreshold = 0.5f;
-    
-    public bool Recognize(List<Vector2> points, out RecognitionResult result) {
-        
+
+    public bool Recognize(List<Vector2> points, out RecognitionResult result)
+    {
         result = new RecognitionResult();
-        
-        // Verify minimum number of points
+
+        // Verificar cantidad mínima de puntos
         if (points.Count < minimumPoints) return false;
-        
-        // Verify that the drawing is closed (first and last point are close)
-        // TODO: better closure check
+
+        // Verificar que el dibujo esté cerrado (primer y último punto cercanos)
         if (Vector2.Distance(points[0], points[points.Count - 1]) > closureThreshold)
             return false;
-        
-        // Calculate the center of the drawing by averaging all points
+
+        // Calcular el centro del dibujo
         Vector2 center = Vector2.zero;
-        foreach (Vector2 p in points) {
+        foreach (Vector2 p in points)
+        {
             center += p;
         }
         center /= points.Count;
-        
-        // Calculate the average radius and variance
 
-        // Average radius is calculated as the average distance from the center to each point
+        // Calcular el radio promedio y la varianza
         float sumRadius = 0f;
         List<float> radii = new List<float>();
-        foreach (Vector2 p in points) {
+        foreach (Vector2 p in points)
+        {
             float d = Vector2.Distance(p, center);
             radii.Add(d);
             sumRadius += d;
         }
         float avgRadius = sumRadius / points.Count;
-        
-        // Variance is calculated as the average absolute difference between each radius and the average radius
+
         float variance = 0f;
-        foreach (float r in radii) {
+        foreach (float r in radii)
+        {
             variance += Mathf.Abs(r - avgRadius);
         }
         variance /= points.Count;
-        
-        // If the variance is lower than the threshold, consider it a circle
-        if (variance < varianceThreshold) {
+
+        // Si la varianza es menor al umbral, se considera un círculo
+        if (variance < varianceThreshold)
+        {
             result.shapeName = "Circle";
-            result.score = 1 - (variance / varianceThreshold); // Score between 0 y 1
+            result.score = 1 - (variance / varianceThreshold);
+
+            // Comprobar si en el interior del círculo hay algún GameObject con la tag "Enemy"
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(center, avgRadius);
+            foreach (Collider2D col in colliders)
+            {
+                if (col.CompareTag("Enemy"))
+                {
+                    // Acceder al script de salud y aplicar daño
+                    EnemyHealthLogicScript enemyHealth = col.GetComponent<EnemyHealthLogicScript>();
+                    if (enemyHealth != null)
+                    {
+                        enemyHealth.TakeDamage(10); // Por ejemplo, aplicar 10 puntos de daño
+                        Debug.Log("Daño aplicado a " + col.name);
+                    }
+                }
+            }
             return true;
         }
-        
+
         return false;
     }
+
 }

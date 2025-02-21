@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class DebugPointController : MonoBehaviour
 {
+    [Header("Point Prefab")]
     public GameObject pointPrefab;
     private GameObject firstPointInstance;
 

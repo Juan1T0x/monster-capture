@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PointerController : MonoBehaviour
 {
+    [Header("Pointer Prefab")]
     public GameObject pointerPrefab;
     private GameObject pointerInstance;
 

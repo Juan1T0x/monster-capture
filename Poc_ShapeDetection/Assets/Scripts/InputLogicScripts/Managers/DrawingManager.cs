@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class DrawingManager : MonoBehaviour
 {
+    [Header("References")]
+    
     public LineRendererController lineController;
     public PointerController pointerController;
     public DebugPointController debugPointController;

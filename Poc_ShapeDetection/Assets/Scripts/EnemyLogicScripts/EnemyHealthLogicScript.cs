@@ -1,13 +1,10 @@
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class LogicScript : MonoBehaviour
+public class EnemyHealthLogicScript : MonoBehaviour
 {
 
     public int maxHealth = 100;
     public int currentHealth;
-    public TMP_Text healthText;
 
     void Start()
     {
@@ -24,7 +21,6 @@ public class LogicScript : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        setHealthText(currentHealth);
         if (currentHealth <= 0)
         {
             Die();
@@ -35,18 +31,20 @@ public class LogicScript : MonoBehaviour
     public void resetHealth()
     {
         currentHealth = maxHealth;
-        setHealthText(currentHealth);
     }
+
 
     public void setHealthText(int health)
     {
         currentHealth = health;
-        healthText.text = health.ToString() + "/" + maxHealth.ToString();
     }
+
 
     void Die()
     {
-        // TODO: Add Game Over logic
-        Debug.Log("Player died.");
+        // TODO: Destroy the enemy object
+        Debug.Log("Enemy killed.");
+        // Destroy the enemy object
+        Destroy(gameObject);
     }
 }
