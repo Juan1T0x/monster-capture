@@ -1,0 +1,54 @@
+{
+    "name": "DrawingControlls",
+    "maps": [
+        {
+            "name": "Drawing",
+            "id": "3a92dd3b-72de-4eab-8c2c-54b08ee148ef",
+            "actions": [
+                {
+                    "name": "Draw",
+                    "type": "Button",
+                    "id": "f14bd0a7-cbe1-452f-9b45-52080e7838ad",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PointerPosition",
+                    "type": "Value",
+                    "id": "ae36e2a4-af63-489a-9ea9-c0b53ebd927a",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5c54c936-6148-4a56-bc3a-f03a35cd3b59",
+                    "path": "<Pointer>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Draw",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "71504394-999b-4fef-b28e-283c665862eb",
+                    "path": "<Pointer>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PointerPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

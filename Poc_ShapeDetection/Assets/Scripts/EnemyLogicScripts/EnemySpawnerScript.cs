@@ -6,7 +6,7 @@ public class EnemySpawnerScript : MonoBehaviour
 
     [Header("Spawn settings")]
     [Tooltip("Rate at which enemies are spawned (in seconds)")]
-    public float spawnRate = 1f;
+    public float spawnRate = 10f;
 
     [Tooltip("If true, the spawner will spawn enemies continuously")]
     public bool spawnContinuously = false;

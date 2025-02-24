@@ -3,77 +3,61 @@ using System.Collections;
 
 public class EnemyMovementScript : MonoBehaviour
 {
-    [Header("Movement Limits")]
-    public float minX = -5f;
-    public float maxX = 5f;
-    public float minY = -3f;
-    public float maxY = 3f;
-
-    [Header("Perlin Noise")]
+    [Header("Perlin Noise Settings")]
+    [Tooltip("Velocidad del ruido Perlin para el movimiento.")]
     public float noiseSpeed = 1f;
+    [Tooltip("Offset para variar la señal de ruido en el eje X.")]
     public float offsetX = 0f;
+    [Tooltip("Offset para variar la señal de ruido en el eje Y.")]
     public float offsetY = 10f;
 
-    [Header("Pause Settings")]
-    public float minPauseTime = 0.5f;
-    public float maxPauseTime = 2f;
-    public float pauseFrequency = 5f; 
-
     private float noiseTime = 0f;
-    private bool isPaused = false;  
+    private Vector2 centerPosition; // Centro de movimiento: queremos que sea (0,0)
+    private float maxRadius;       // Radio máximo determinado por los bordes de la cámara
 
     void Start()
     {
-        
-        StartCoroutine(RandomPauseRoutine());
+        // Establecemos el centro de movimiento en (0,0)
+        centerPosition = Vector2.zero;
+
+        // Posicionamos al enemigo en el centro al iniciar.
+        transform.position = centerPosition;
+
+        // Calculamos el radio máximo basado en la cámara principal (asumiendo que es ortográfica).
+        Camera cam = Camera.main;
+        if (cam != null && cam.orthographic)
+        {
+            // La mitad del alto de la cámara
+            float halfHeight = cam.orthographicSize;
+            // La mitad del ancho se obtiene multiplicando por el aspect ratio
+            float halfWidth = cam.orthographicSize * cam.aspect;
+            // Elegimos el menor para asegurar que nos quedamos dentro de la vista
+            maxRadius = Mathf.Min(halfWidth, halfHeight);
+        }
+        else
+        {
+            // Valor de respaldo en caso de que la cámara no esté configurada o no sea ortográfica.
+            maxRadius = 5f;
+        }
     }
 
     void Update()
     {
-        // If paused, don't move
-        if (isPaused) return;
-
-        // We use Perlin Noise to generate a smooth random movement
+        // Incrementamos el tiempo de ruido.
         noiseTime += Time.deltaTime * noiseSpeed;
 
-        float noiseValX = Mathf.PerlinNoise(noiseTime + offsetX, offsetY);
-        float noiseValY = Mathf.PerlinNoise(offsetX, noiseTime + offsetY);
+        // Obtenemos un valor de ruido para el ángulo y lo mapeamos a [0, 2π].
+        float noiseValAngle = Mathf.PerlinNoise(noiseTime + offsetX, offsetY);
+        float angle = noiseValAngle * 2 * Mathf.PI;
 
-        float targetX = Mathf.Lerp(minX, maxX, noiseValX);
-        float targetY = Mathf.Lerp(minY, maxY, noiseValY);
+        // Obtenemos un valor de ruido para el radio y lo interpolamos de 0 a maxRadius.
+        float noiseValRadius = Mathf.PerlinNoise(offsetX, noiseTime + offsetY);
+        float targetRadius = Mathf.Lerp(0f, maxRadius, noiseValRadius);
 
-        // Smoothly move towards the target position
-        Vector2 currentPos = transform.position;
-        Vector2 targetPos = new Vector2(targetX, targetY);
+        // Calculamos el offset a partir del ángulo y el radio.
+        Vector2 offset = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * targetRadius;
 
-        // Interpolate to the target position
-        Vector2 newPos = Vector2.Lerp(currentPos, targetPos, 0.05f);
-
-        // Clamp the position to the limits
-        newPos.x = Mathf.Clamp(newPos.x, minX, maxX);
-        newPos.y = Mathf.Clamp(newPos.y, minY, maxY);
-
-        transform.position = newPos;
-    }
-
-    // Coroutine to generate random pauses during the game
-    IEnumerator RandomPauseRoutine()
-    {
-        while (true)
-        {
-            // We wait a random time before the next pause
-            float timeToNextPause = Random.Range(pauseFrequency * 0.5f, pauseFrequency * 1.5f);
-            yield return new WaitForSeconds(timeToNextPause);
-
-            // We pause the movement of the enemy
-            isPaused = true;
-
-            // Wait a random time before resuming movement
-            float pauseDuration = Random.Range(minPauseTime, maxPauseTime);
-            yield return new WaitForSeconds(pauseDuration);
-
-            // Resume movement
-            isPaused = false;
-        }
+        // Establecemos la posición del enemigo: centro + offset.
+        transform.position = centerPosition + offset;
     }
 }

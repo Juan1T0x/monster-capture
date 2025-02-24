@@ -4,14 +4,28 @@ using UnityEngine.UI;
 
 public class LogicScript : MonoBehaviour
 {
-
     public int maxHealth = 100;
     public int currentHealth;
+    public bool isAlive = true;
+
     public TMP_Text healthText;
+
+    private UIManager uiManager;
+
+    void Awake()
+    {
+        uiManager = FindFirstObjectByType<UIManager>();
+
+        if (uiManager == null)
+            Debug.LogError("UIManager no encontrado en la escena.");
+
+        uiManager.ShowMainScreen();
+    }
 
     void Start()
     {
         setHealthText(maxHealth);
+        isAlive = true;
     }
 
     [ContextMenu("Take Damage")]
@@ -20,14 +34,16 @@ public class LogicScript : MonoBehaviour
         TakeDamage(10);
     }
 
-
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
-        setHealthText(currentHealth);
-        if (currentHealth <= 0)
+        if (isAlive)
         {
-            Die();
+            currentHealth -= damage;
+            setHealthText(currentHealth);
+            if (currentHealth <= 0)
+            {
+                Die();
+            }
         }
     }
 
@@ -41,12 +57,14 @@ public class LogicScript : MonoBehaviour
     public void setHealthText(int health)
     {
         currentHealth = health;
-        healthText.text = health.ToString() + "/" + maxHealth.ToString();
+        healthText.text = health + "/" + maxHealth;
     }
 
-    void Die()
+    [ContextMenu("Die")]
+    public void Die()
     {
-        // TODO: Add Game Over logic
         Debug.Log("Player died.");
+        isAlive = false;
+        uiManager.ShowGameOverScreen();
     }
 }
