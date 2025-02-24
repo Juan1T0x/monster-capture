@@ -14,26 +14,39 @@ public class RecognitionManager : MonoBehaviour
     [Tooltip("Text to display when a shape is recognized")]
     public TMP_Text shapeOkText;
 
-    void Awake() {
+    // Lanzar evento cuando se reconozca una forma
+    public event Action<RecognitionResult> OnShapeRecognized;
+
+    void Awake()
+    {
         // Look for all components that implement IShapeRecognizer in this GameObject or its children
         IShapeRecognizer[] foundRecognizers = GetComponentsInChildren<IShapeRecognizer>();
-        if (foundRecognizers != null && foundRecognizers.Length > 0) {
+        if (foundRecognizers != null && foundRecognizers.Length > 0)
+        {
             recognizers.AddRange(foundRecognizers);
-        } else {
+        }
+        else
+        {
             Debug.LogWarning("No shape recognizers found.");
         }
         shapeOkText.gameObject.SetActive(false);
 
     }
-    
+
     // Method invoked when drawing is finished
-    public void RecognizeShape(List<Vector2> points) {
-        foreach (IShapeRecognizer recognizer in recognizers) {
+    public void RecognizeShape(List<Vector2> points)
+    {
+        foreach (IShapeRecognizer recognizer in recognizers)
+        {
             RecognitionResult result;
-            if (recognizer.Recognize(points, out result)) {
+            if (recognizer.Recognize(points, out result))
+            {
                 Debug.Log("Shape recognized: " + result.shapeName + " (score: " + result.score + ")");
                 displayShapeRecognizedText(result.shapeName);
+                // Send shape recognized event to subscribers
+                OnShapeRecognized?.Invoke(result);
                 return;
+
             }
         }
         Debug.Log("Shape not recognized.");

@@ -12,6 +12,24 @@ public class LineRendererController : MonoBehaviour
 
     public IReadOnlyList<Vector2> Points => points;
 
+    // TODO: estructura para guardar los segmentos de línea junto con su collider
+    /*
+
+    struct LineSegment
+    {
+        public Vector2 start;
+        public Vector2 end;
+        public BoxCollider2D collider;
+    }
+
+    */
+
+    public void Awake()
+    {
+        points.Clear();
+        lineRenderer.positionCount = 0;
+    }
+
     public void ResetLine()
     {
         points.Clear();
@@ -42,4 +60,6 @@ public class LineRendererController : MonoBehaviour
             lineRenderer.SetPosition(i, points[i]);
         }
     }
+
+    // private void UpdateLineRendererCollider()
 }
