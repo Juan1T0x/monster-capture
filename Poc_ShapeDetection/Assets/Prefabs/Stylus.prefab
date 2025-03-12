@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2615658217577285082}
   - component: {fileID: 4906773294375084682}
   m_Layer: 0
-  m_Name: Pointer
+  m_Name: Stylus
   m_TagString: Pointer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

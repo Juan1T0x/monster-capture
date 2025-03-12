@@ -1,0 +1,24 @@
+[
+  {
+    "patternName": "buenos días",
+    "steps": [
+      {
+        "gesture": "PinchIn",
+        "parametersJson": "{ \"fingers\": 2 }"
+      },
+      {
+        "gesture": "Shape",
+        "parametersJson": "{ \"shape\": \"+\", \"subSteps\": [ { \"line\": \"horizontal\", \"requiredDirection\": \"leftToRight\", \"toleranceDegrees\": 10 }, { \"line\": \"vertical\", \"requiredDirection\": \"bottomToTop\", \"toleranceDegrees\": 10 } ], \"crossRequirement\": true }"
+      }
+    ]
+  },
+  {
+    "patternName": "hola",
+    "steps": [
+      {
+        "gesture": "RepeatedLine",
+        "parametersJson": "{ \"direction\": \"leftToRight\", \"minRepetitions\": 3 }"
+      }
+    ]
+  }
+]

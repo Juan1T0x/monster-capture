@@ -1,12 +1,23 @@
 # ninja log v5
+13	1981	7616869653081304	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	f7227981fa396fd0
 61	507	7616869638246375	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	42941459c4769842
+25	1550	7616869648610867	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	48652197f3979e4c
 509	790	7616869640717721	C:/Users/juan_/Documents/GitHub/monster-capture/Poc_ShapeDetection/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/22d44411/obj/arm64-v8a/libswappywrapper.so	bdb588b8abc3006c
 32	1548	7616869648497991	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	6d3c245302d2f831
-25	1550	7616869648610867	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	48652197f3979e4c
-1	1562	7616869648796833	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	5cc03315214771d4
-39	1591	7616869649098805	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	542fd10254d7950c
 50	1692	7616869650146450	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	c81e18149f761ceb
+1	1562	7616869648796833	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	5cc03315214771d4
 7	1751	7616869650681635	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	5eaf788c742c5adc
+39	1591	7616869649098805	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	542fd10254d7950c
 19	1890	7616869652175382	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	b0fa7b00faf8152
-13	1981	7616869653081304	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	f7227981fa396fd0
 1981	2082	7616869654128296	C:/Users/juan_/Documents/GitHub/monster-capture/Poc_ShapeDetection/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/22d44411/obj/arm64-v8a/libgame.so	45698c9058dbaf6d
+56	484	7634994345505678	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	42941459c4769842
+484	732	7634994348060134	C:/Users/juan_/Documents/GitHub/monster-capture/Poc_ShapeDetection/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/22d44411/obj/arm64-v8a/libswappywrapper.so	bdb588b8abc3006c
+29	1424	7634994354823774	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	6d3c245302d2f831
+24	1455	7634994355141380	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	5cc03315214771d4
+20	1473	7634994355338446	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	48652197f3979e4c
+41	1486	7634994355500044	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	542fd10254d7950c
+48	1596	7634994356643144	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	c81e18149f761ceb
+14	1657	7634994357227600	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	5eaf788c742c5adc
+35	1808	7634994358748359	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	b0fa7b00faf8152
+9	1961	7634994360290988	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	f7227981fa396fd0
+1961	2071	7634994361475715	C:/Users/juan_/Documents/GitHub/monster-capture/Poc_ShapeDetection/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/22d44411/obj/arm64-v8a/libgame.so	45698c9058dbaf6d

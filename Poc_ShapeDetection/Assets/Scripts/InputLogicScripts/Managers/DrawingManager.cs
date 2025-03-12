@@ -2,62 +2,72 @@ using UnityEngine;
 
 public class DrawingManager : MonoBehaviour
 {
-    [Header("References")]
+    [Header("Lines Drawn Logic")]
+    [SerializeField] private LineRenderer lineRendererPrefab;
+
+    [Header("References to Controllers")]
+    public LineRendererController lineRendererController;
+    public StylusController stylusController;
+    public VisualPointsController visualPointsController;
     
-    public LineRendererController lineController;
-    public PointerController pointerController;
-    public DebugPointController debugPointController;
+    [Header("References to Managers")]
+    public LineStorageManager lineStorageManager; // Nueva referencia
 
-    private DrawingInputHandler inputHandler;
-    private RecognitionManager recognitionManager;
+    private InputHandler inputHandler;
 
-    void Awake()
+    private void Awake()
     {
-
-        inputHandler = FindFirstObjectByType<DrawingInputHandler>();
-        recognitionManager = FindFirstObjectByType<RecognitionManager>();
-
-        if (inputHandler == null)
-            Debug.LogError("DrawingInputHandler is missing!");
-
-        if (recognitionManager == null)
-            Debug.LogError("RecognitionManager not found in scene!");
+        inputHandler = FindFirstObjectByType<InputHandler>();
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
         inputHandler.OnStartDrawing += HandleStartDrawing;
         inputHandler.OnUpdateDrawing += HandleUpdateDrawing;
         inputHandler.OnEndDrawing += HandleEndDrawing;
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         inputHandler.OnStartDrawing -= HandleStartDrawing;
         inputHandler.OnUpdateDrawing -= HandleUpdateDrawing;
         inputHandler.OnEndDrawing -= HandleEndDrawing;
     }
 
-    void HandleStartDrawing(Vector2 startPos)
+    private void HandleStartDrawing(Vector2 startCoordinates)
     {
-        lineController.ResetLine();
-        debugPointController.Clear();
-        lineController.AddPoint(startPos);
-        pointerController.UpdatePointerPosition(startPos);
+        lineRendererController.ResetLine();
+        visualPointsController.Clear();
+
+        stylusController.UpdatePointerPosition(startCoordinates);
+        lineRendererController.AddPoint(startCoordinates);
+        visualPointsController.CreateFirstPoint(startCoordinates);
     }
 
-    void HandleUpdateDrawing(Vector2 currentPos)
+    private void HandleUpdateDrawing(Vector2 currentCoordinates)
     {
-        lineController.AddPoint(currentPos);
-        pointerController.UpdatePointerPosition(currentPos);
-        debugPointController.UpdateFirstPoint(lineController.Points);
+        stylusController.UpdatePointerPosition(currentCoordinates);
+        lineRendererController.AddPoint(currentCoordinates);
+        visualPointsController.UpdateFirstPoint(lineRendererController.Points);
     }
 
-    void HandleEndDrawing()
+    private void HandleEndDrawing()
     {
-        pointerController.HidePointer();
-        recognitionManager.RecognizeShape(lineController.Points as System.Collections.Generic.List<Vector2>);
-        lineController.ResetLine();
-        debugPointController.Clear();
+        LineRenderer newLine = CopyCurrentLineRenderer();
+        lineStorageManager.AddLine(newLine);
+        stylusController.HidePointer();
+        lineRendererController.ResetLine();
+        visualPointsController.Clear();
+    }
+
+    private LineRenderer CopyCurrentLineRenderer()
+    {
+        LineRenderer newLineRenderer = Instantiate(lineRendererPrefab, lineRendererController.transform.parent);
+        newLineRenderer.positionCount = lineRendererController.lineRenderer.positionCount;
+        for (int i = 0; i < newLineRenderer.positionCount; i++)
+        {
+            newLineRenderer.SetPosition(i, lineRendererController.lineRenderer.GetPosition(i));
+        }
+        return newLineRenderer;
     }
 }
