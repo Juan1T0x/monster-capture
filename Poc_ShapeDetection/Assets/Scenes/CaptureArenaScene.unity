@@ -446,8 +446,8 @@ MonoBehaviour:
   recognitionPatterns: []
   fontSize: 40
   textColor: {r: 0.9245283, g: 0.23113208, b: 0.23113208, a: 1}
-  margin: {x: 40, y: 0}
-  labelSize: {x: 400, y: 300}
+  margin: {x: 40, y: 160}
+  labelSize: {x: 1000, y: 850}
 --- !u!4 &535713363
 Transform:
   m_ObjectHideFlags: 0
